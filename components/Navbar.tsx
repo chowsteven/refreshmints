@@ -8,7 +8,7 @@ export const Navbar = () => {
         <Link href='/'>
           <a className='flex items-center'>
             <Image
-              src='/../public/icon.png'
+              src='/images/icon.png'
               alt='Refreshmints icon'
               height={24}
               width={24}
