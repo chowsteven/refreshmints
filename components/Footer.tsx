@@ -2,13 +2,16 @@ import useSWR from 'swr';
 import Image from 'next/image';
 import { Price } from '../interfaces/Price';
 import { Gas } from '../interfaces/Gas';
+import { fetcher } from '../utils/fetcher';
 
 export const Footer = () => {
-  const fetcher = (url: string) => fetch(url).then((res) => res.json());
+  // fetch eth price
   const { data: price, error: priceErr } = useSWR<Price, Error>(
     '/api/eth/price',
     fetcher
   );
+
+  // fetch gas prices
   const { data: gas, error: gasErr } = useSWR<Gas, Error>(
     '/api/eth/gas',
     fetcher
@@ -16,6 +19,7 @@ export const Footer = () => {
 
   return (
     <footer className='flex justify-center gap-24 px-12 py-3 bg-gray-800'>
+      {/* eth price */}
       <div className='flex items-center gap-2'>
         <Image
           src='/images/eth.png'
@@ -24,6 +28,9 @@ export const Footer = () => {
           alt='Ethereum logo'
         />
         <span className={price && 'font-medium'}>
+          {/* if error, show error message
+          if fetching, show loading message
+          else show price */}
           {priceErr
             ? priceErr.message
             : price
@@ -31,9 +38,14 @@ export const Footer = () => {
             : 'Fetching ETH price...'}
         </span>
       </div>
+
+      {/* gas prices */}
       <div className='flex items-center gap-4'>
         <Image src='/images/gas.png' height={24} width={24} alt='Gas icon' />
         <span className='flex items-center gap-1.5'>
+          {/* if error, show error message
+          if fetching, show loading message
+          else show current slow and gas gwei */}
           {gasErr ? (
             gasErr.message
           ) : gas ? (
