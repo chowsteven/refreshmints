@@ -24,17 +24,20 @@ export const ActivityOverview = ({
   const [tenMinuteSales, setTenMinuteSales] = useState<number>(0);
 
   // one hour floor price
-  const [oneHourFloor, setOneHourFloor] = useState<number>(0);
+  const [oneHourFloor, setOneHourFloor] = useState<string | number>('---');
 
-  // initial load can show initial states for too long because of interval time
-  // currently set to 1 minute to avoid abusing API, but may be able to set to 1 second
+  // on component mount, get timestamps and set up interval
   useEffect(() => {
+    setOneDayAgo(DateTime.now().minus({ days: 1 }).toSeconds());
+    setOneHourAgo(DateTime.now().minus({ hours: 1 }).toSeconds());
+    setTenMinutesAgo(DateTime.now().minus({ minutes: 10 }).toSeconds());
+
     const interval = setInterval(() => {
       // set timestamps on mount
       setOneDayAgo(DateTime.now().minus({ days: 1 }).toSeconds());
       setOneHourAgo(DateTime.now().minus({ hours: 1 }).toSeconds());
       setTenMinutesAgo(DateTime.now().minus({ minutes: 10 }).toSeconds());
-    }, 60000);
+    }, 5000);
 
     // clear interval on unmount
     return () => clearInterval(interval);
@@ -49,7 +52,7 @@ export const ActivityOverview = ({
 
     collectionSalesData.sales.forEach((sale) => {
       // less than ten minutes ago
-      if (sale.timestamp > tenMinutesAgo) {
+      if (sale.timestamp >= tenMinutesAgo) {
         tempOneDaySales++;
         tempOneHourSales++;
         tempTenMinuteSales++;
@@ -59,19 +62,17 @@ export const ActivityOverview = ({
           tempOneHourFloor = sale.price.amount.decimal;
         }
         // less than an hour ago
-      } else if (sale.timestamp > oneHourAgo) {
+      } else if (sale.timestamp >= oneHourAgo) {
         tempOneDaySales++;
         tempOneHourSales++;
 
-        // check sale price against current one hour floor, update if lower
         if (sale.price.amount.decimal < tempOneHourFloor) {
           tempOneHourFloor = sale.price.amount.decimal;
         }
         // less than a day ago
-      } else if (sale.timestamp > oneDayAgo) {
+      } else if (sale.timestamp >= oneDayAgo) {
         tempOneDaySales++;
 
-        // check sale price against current one hour floor, update if lower
         if (sale.price.amount.decimal < tempOneHourFloor) {
           tempOneHourFloor = sale.price.amount.decimal;
         }
@@ -82,7 +83,11 @@ export const ActivityOverview = ({
     setOneDaySales(tempOneDaySales);
     setOneHourSales(tempOneHourSales);
     setTenMinuteSales(tempTenMinuteSales);
-    setOneHourFloor(tempOneHourFloor);
+
+    // tempOneHourFloor will be 99999 if there have been no sales in the past hour
+    if (tempOneHourFloor !== 99999) {
+      setOneHourFloor(tempOneHourFloor);
+    }
   }, [collectionSalesData, oneDayAgo, oneHourAgo, tenMinutesAgo]);
 
   return (
