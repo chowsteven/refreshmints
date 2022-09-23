@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { TokenModal } from '../components/TokenModal';
 import { ExternalTokenIconSale } from './ExternalTokenIconSale';
 import { SingleSale } from '../interfaces/CollectionSalesData';
 import { DateTime } from 'luxon';
@@ -10,14 +11,22 @@ interface SaleCardProps {
 
 export const SaleCard = ({ sale }: SaleCardProps) => {
   const [relativeTime, setRelativeTime] = useState<string | null>('');
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const relTime = DateTime.fromSeconds(sale.timestamp).toRelative();
     setRelativeTime(relTime);
   }, [sale.timestamp]);
 
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div className='flex justify-between max-w-[512px] h-16 p-1 pr-2 my-2 bg-gray-800 rounded-md'>
+    <div
+      onClick={handleClick}
+      className='flex justify-between max-w-[512px] h-16 p-1 pr-2 my-2 bg-gray-800 rounded-md hover:cursor-pointer hover:bg-gray-700'
+    >
       <div className='flex gap-2'>
         <Image
           src={sale.token.image ? sale.token.image : '/images/eth.png'}
@@ -61,6 +70,13 @@ export const SaleCard = ({ sale }: SaleCardProps) => {
           <div className='text-sm text-gray-400'>{relativeTime}</div>
         </div>
       </div>
+
+      <TokenModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        contract={sale.token.contract}
+        tokenId={sale.token.tokenId}
+      />
     </div>
   );
 };

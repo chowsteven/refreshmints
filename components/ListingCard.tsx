@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { TokenModal } from '../components/TokenModal';
 import { ExternalTokenIconListing } from './ExternalTokenIconListing';
 import { SingleListing } from '../interfaces/CollectionListingsData';
 import { DateTime } from 'luxon';
@@ -10,14 +11,22 @@ interface ListingCardProps {
 
 export const ListingCard = ({ listing }: ListingCardProps) => {
   const [relativeTime, setRelativeTime] = useState<string | null>('');
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const relTime = DateTime.fromISO(listing.updatedAt).toRelative();
     setRelativeTime(relTime);
   }, [listing.updatedAt]);
 
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <div className='flex justify-between max-w-[512px] h-16 p-1 pr-2 my-2 bg-gray-800 rounded-md'>
+    <div
+      onClick={handleClick}
+      className='flex justify-between max-w-[512px] h-16 p-1 pr-2 my-2 bg-gray-800 rounded-md hover:cursor-pointer hover:bg-gray-700'
+    >
       <div className='flex gap-2'>
         <Image
           src={
@@ -59,6 +68,13 @@ export const ListingCard = ({ listing }: ListingCardProps) => {
           <div className='text-sm text-gray-400'>{relativeTime}</div>
         </div>
       </div>
+
+      <TokenModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        contract={listing.contract}
+        tokenId={listing.tokenSetId.split(':')[2]}
+      />
     </div>
   );
 };
