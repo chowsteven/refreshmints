@@ -20,7 +20,7 @@ export const Holders = ({ numHoldersArr, collectionData }: HoldersProps) => {
 
   return (
     <div className='flex flex-col gap-4 xl:gap-12 xl:flex-row'>
-      <div className='flex justify-center gap-12 bg-gray-800 px-12 py-6 rounded-md'>
+      <div className='flex justify-center gap-4 bg-gray-800 px-12 py-6 rounded-md md:gap-12'>
         <div>
           <OverviewStat stat={collectionData.tokenCount} description='SUPPLY' />
         </div>
@@ -41,7 +41,7 @@ export const Holders = ({ numHoldersArr, collectionData }: HoldersProps) => {
         </div>
       </div>
 
-      <div className='flex justify-center gap-12 bg-gray-800 px-12 py-6 rounded-md'>
+      <div className='flex justify-center gap-4 bg-gray-800 px-12 py-6 rounded-md sm:gap-12'>
         <div>
           <OverviewStat stat={numHoldersArr[0]} description='HOLDS 1' />
         </div>

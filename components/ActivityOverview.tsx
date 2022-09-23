@@ -91,7 +91,7 @@ export const ActivityOverview = ({
   }, [collectionSalesData, oneDayAgo, oneHourAgo, tenMinutesAgo]);
 
   return (
-    <div className='flex justify-center gap-12 bg-gray-800 px-12 py-6 rounded-md'>
+    <div className='flex justify-center gap-4 bg-gray-800 px-12 py-6 rounded-md lg:gap-12'>
       <div>
         <OverviewStat stat={oneDaySales} description='1D SALES' />
       </div>
