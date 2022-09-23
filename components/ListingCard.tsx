@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import { ExternalTokenIconListing } from './ExternalTokenIconListing';
 import { SingleListing } from '../interfaces/CollectionListingsData';
 import { DateTime } from 'luxon';
@@ -8,7 +9,12 @@ interface ListingCardProps {
 }
 
 export const ListingCard = ({ listing }: ListingCardProps) => {
-  const relativeTime = DateTime.fromISO(listing.updatedAt).toRelative();
+  const [relativeTime, setRelativeTime] = useState<string | null>('');
+
+  useEffect(() => {
+    const relTime = DateTime.fromISO(listing.updatedAt).toRelative();
+    setRelativeTime(relTime);
+  }, [listing.updatedAt]);
 
   return (
     <div className='flex justify-between max-w-[512px] h-16 p-1 pr-2 my-2 bg-gray-800 rounded-md'>

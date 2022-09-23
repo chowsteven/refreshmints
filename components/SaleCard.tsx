@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 import { ExternalTokenIconSale } from './ExternalTokenIconSale';
 import { SingleSale } from '../interfaces/CollectionSalesData';
 import { DateTime } from 'luxon';
@@ -8,7 +9,12 @@ interface SaleCardProps {
 }
 
 export const SaleCard = ({ sale }: SaleCardProps) => {
-  const relativeTime = DateTime.fromSeconds(sale.timestamp).toRelative();
+  const [relativeTime, setRelativeTime] = useState<string | null>('');
+
+  useEffect(() => {
+    const relTime = DateTime.fromSeconds(sale.timestamp).toRelative();
+    setRelativeTime(relTime);
+  }, [sale.timestamp]);
 
   return (
     <div className='flex justify-between max-w-[512px] h-16 p-1 pr-2 my-2 bg-gray-800 rounded-md'>
