@@ -1,5 +1,5 @@
 import { SingleCollection } from '../interfaces/CollectionData';
-import { HolderStat } from './HolderStat';
+import { OverviewStat } from './OverviewStat';
 
 interface HoldersProps {
   numHoldersArr: number[];
@@ -22,34 +22,40 @@ export const Holders = ({ numHoldersArr, collectionData }: HoldersProps) => {
     <div className='flex flex-col gap-4 xl:gap-12 xl:flex-row'>
       <div className='flex justify-center gap-12 bg-gray-800 px-12 py-6 rounded-md'>
         <div>
-          <HolderStat stat={collectionData.tokenCount} description='SUPPLY' />
+          <OverviewStat stat={collectionData.tokenCount} description='SUPPLY' />
         </div>
         <div>
-          <HolderStat stat={collectionData.ownerCount} description='HOLDERS' />
+          <OverviewStat
+            stat={collectionData.ownerCount}
+            description='HOLDERS'
+          />
         </div>
         <div>
-          <HolderStat stat={avgOwned} description='AVG OWNED' />
+          <OverviewStat stat={avgOwned} description='AVG OWNED' />
         </div>
         <div>
-          <HolderStat stat={`${uniqueHolders}%`} description='UNIQUE HOLDERS' />
+          <OverviewStat
+            stat={`${uniqueHolders}%`}
+            description='UNIQUE HOLDERS'
+          />
         </div>
       </div>
 
       <div className='flex justify-center gap-12 bg-gray-800 px-12 py-6 rounded-md'>
         <div>
-          <HolderStat stat={numHoldersArr[0]} description='HOLDS 1' />
+          <OverviewStat stat={numHoldersArr[0]} description='HOLDS 1' />
         </div>
         <div>
-          <HolderStat stat={numHoldersArr[1]} description='2-5' />
+          <OverviewStat stat={numHoldersArr[1]} description='2-5' />
         </div>
         <div>
-          <HolderStat stat={numHoldersArr[2]} description='6-20' />
+          <OverviewStat stat={numHoldersArr[2]} description='6-20' />
         </div>
         <div>
-          <HolderStat stat={numHoldersArr[3]} description='21-50' />
+          <OverviewStat stat={numHoldersArr[3]} description='21-50' />
         </div>
         <div>
-          <HolderStat stat={numHoldersArr[4]} description='OVER 50' />
+          <OverviewStat stat={numHoldersArr[4]} description='OVER 50' />
         </div>
       </div>
     </div>
