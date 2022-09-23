@@ -19,7 +19,7 @@ export const Navbar = () => {
         <div>Search</div>
       </div>
       <div className='flex gap-6'>
-        <Link href='/live-feed'>Live Feed</Link>
+        <Link href='/firehose'>Firehose</Link>
         <Link href='/trending'>Trending</Link>
       </div>
     </nav>
