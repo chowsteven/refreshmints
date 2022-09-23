@@ -55,7 +55,7 @@ export const ActivityOverview = ({
         tempTenMinuteSales++;
 
         // check sale price against current one hour floor, update if lower
-        if (sale.price.amount.decimal > tempOneHourFloor) {
+        if (sale.price.amount.decimal < tempOneHourFloor) {
           tempOneHourFloor = sale.price.amount.decimal;
         }
         // less than an hour ago
@@ -64,12 +64,17 @@ export const ActivityOverview = ({
         tempOneHourSales++;
 
         // check sale price against current one hour floor, update if lower
-        if (sale.price.amount.decimal > tempOneHourFloor) {
+        if (sale.price.amount.decimal < tempOneHourFloor) {
           tempOneHourFloor = sale.price.amount.decimal;
         }
         // less than a day ago
       } else if (sale.timestamp > oneDayAgo) {
         tempOneDaySales++;
+
+        // check sale price against current one hour floor, update if lower
+        if (sale.price.amount.decimal < tempOneHourFloor) {
+          tempOneHourFloor = sale.price.amount.decimal;
+        }
       }
     });
 
