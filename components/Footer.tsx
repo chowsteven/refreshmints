@@ -34,7 +34,7 @@ export const Footer = () => {
           {priceErr
             ? priceErr.message
             : price
-            ? `$${price.result.ethusd}`
+            ? `$${Number(price.result.ethusd).toFixed(2)}`
             : 'Fetching ETH price...'}
         </span>
       </div>
