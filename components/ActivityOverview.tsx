@@ -50,34 +50,33 @@ export const ActivityOverview = ({
     let tempTenMinuteSales = 0;
     let tempOneHourFloor = 99999;
 
-    collectionSalesData.sales.forEach((sale) => {
-      // less than ten minutes ago
-      if (sale.timestamp >= tenMinutesAgo) {
-        tempOneDaySales++;
-        tempOneHourSales++;
-        tempTenMinuteSales++;
+    if (tenMinutesAgo !== 0 && oneHourAgo !== 0 && oneDayAgo !== 0) {
+      collectionSalesData.sales.forEach((sale) => {
+        // less than ten minutes ago
+        if (sale.timestamp >= tenMinutesAgo) {
+          tempOneDaySales++;
+          tempOneHourSales++;
+          tempTenMinuteSales++;
 
-        // check sale price against current one hour floor, update if lower
-        if (sale.price.amount.decimal < tempOneHourFloor) {
-          tempOneHourFloor = sale.price.amount.decimal;
-        }
-        // less than an hour ago
-      } else if (sale.timestamp >= oneHourAgo) {
-        tempOneDaySales++;
-        tempOneHourSales++;
+          // console.log(sale.timestamp, tenMinutesAgo);
+          // check sale price against current one hour floor, update if lower
+          if (sale.price.amount.decimal < tempOneHourFloor) {
+            tempOneHourFloor = sale.price.amount.decimal;
+          }
+          // less than an hour ago
+        } else if (sale.timestamp >= oneHourAgo) {
+          tempOneDaySales++;
+          tempOneHourSales++;
 
-        if (sale.price.amount.decimal < tempOneHourFloor) {
-          tempOneHourFloor = sale.price.amount.decimal;
+          if (sale.price.amount.decimal < tempOneHourFloor) {
+            tempOneHourFloor = sale.price.amount.decimal;
+          }
+          // less than a day ago
+        } else if (sale.timestamp >= oneDayAgo) {
+          tempOneDaySales++;
         }
-        // less than a day ago
-      } else if (sale.timestamp >= oneDayAgo) {
-        tempOneDaySales++;
-
-        if (sale.price.amount.decimal < tempOneHourFloor) {
-          tempOneHourFloor = sale.price.amount.decimal;
-        }
-      }
-    });
+      });
+    }
 
     // set states
     setOneDaySales(tempOneDaySales);
