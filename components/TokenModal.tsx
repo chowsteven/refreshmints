@@ -20,17 +20,60 @@ export const TokenModal = ({
   tokenId,
 }: TokenModalProps) => {
   const [relativeTime, setRelativeTime] = useState<string | null>('');
+  const [lastPrice, setLastPrice] = useState<number | null>(null);
   const { tokenData, error: tokenDataError } = useTokenData(contract, tokenId);
   const exitButtonRef = useRef(null);
 
+  // check most recent trade, which could be a lastBuy, lastSell or none
   useEffect(() => {
     if (tokenData) {
-      if (tokenData.tokens[0].token.lastSell.timestamp) {
+      // if both lastBuy and lastSell exist, set the price of the more recent event
+      if (
+        tokenData.tokens[0].token.lastBuy.timestamp &&
+        tokenData.tokens[0].token.lastSell.timestamp
+      ) {
+        if (
+          tokenData.tokens[0].token.lastBuy.timestamp >
+          tokenData.tokens[0].token.lastSell.timestamp
+        ) {
+          setLastPrice(tokenData.tokens[0].token.lastBuy.value);
+
+          const relTime = DateTime.fromSeconds(
+            tokenData.tokens[0].token.lastBuy.timestamp
+          ).toRelative();
+
+          setRelativeTime(relTime);
+        } else {
+          setLastPrice(tokenData.tokens[0].token.lastSell.value);
+
+          const relTime = DateTime.fromSeconds(
+            tokenData.tokens[0].token.lastSell.timestamp
+          ).toRelative();
+
+          setRelativeTime(relTime);
+        }
+
+        // only one or none exist, check lastBuy
+      } else if (tokenData.tokens[0].token.lastBuy.timestamp) {
+        setLastPrice(tokenData.tokens[0].token.lastBuy.value);
+
+        const relTime = DateTime.fromSeconds(
+          tokenData.tokens[0].token.lastBuy.timestamp
+        ).toRelative();
+
+        setRelativeTime(relTime);
+
+        // only one or none exist, check lastSell
+      } else if (tokenData.tokens[0].token.lastSell.timestamp) {
+        setLastPrice(tokenData.tokens[0].token.lastSell.value);
+
         const relTime = DateTime.fromSeconds(
           tokenData.tokens[0].token.lastSell.timestamp
         ).toRelative();
+
         setRelativeTime(relTime);
       }
+      // if none exist, leave lastPrice as null
     }
   }, [tokenData]);
 
@@ -131,13 +174,11 @@ export const TokenModal = ({
               </div>
 
               {/* last sell info */}
-              {tokenData.tokens[0].token.lastSell.value ? (
+              {lastPrice ? (
                 <div className='text-xl'>
                   Last trade was at{' '}
-                  <span className='font-bold'>
-                    Ξ{tokenData.tokens[0].token.lastSell.value}
-                  </span>
-                  , {relativeTime}
+                  <span className='font-bold'>Ξ{lastPrice}</span>,{' '}
+                  {relativeTime}
                 </div>
               ) : (
                 <div className='text-xl'>There have been no recent trades.</div>
