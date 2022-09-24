@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { Searchbar } from './Searchbar';
 
 export const Navbar = () => {
   return (
@@ -16,7 +17,7 @@ export const Navbar = () => {
             <span className='pl-2 pr-6'>Refreshmints</span>
           </a>
         </Link>
-        <div>Search</div>
+        <Searchbar />
       </div>
       <div className='flex gap-6'>
         <Link href='/firehose'>Firehose</Link>
