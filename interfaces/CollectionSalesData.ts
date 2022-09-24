@@ -43,5 +43,5 @@ export interface SingleSale {
 
 export interface CollectionSalesData {
   sales: SingleSale[];
-  continuation: string;
+  continuation: string | null;
 }

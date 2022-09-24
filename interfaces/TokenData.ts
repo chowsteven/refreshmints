@@ -56,5 +56,5 @@ export interface SingleToken {
 
 export interface TokenData {
   tokens: Array<SingleToken>;
-  continuation: string;
+  continuation: string | null;
 }

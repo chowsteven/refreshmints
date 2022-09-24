@@ -63,5 +63,5 @@ export interface SingleListing {
 
 export interface CollectionListingsData {
   orders: SingleListing[];
-  continuation: string;
+  continuation: string | null;
 }

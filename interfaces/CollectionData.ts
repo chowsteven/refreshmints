@@ -81,4 +81,5 @@ export interface SingleCollection {
 
 export interface CollectionData {
   collections: Array<SingleCollection>;
+  continuation?: string | null;
 }
