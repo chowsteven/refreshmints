@@ -8,6 +8,7 @@ const nextConfig = {
       'i.seadn.io',
       'lh3.googleusercontent.com',
       'openseauserdata.com',
+      'media.artblocks.io',
     ],
   },
 };
