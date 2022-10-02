@@ -58,7 +58,6 @@ export const ActivityOverview = ({
           tempOneHourSales++;
           tempTenMinuteSales++;
 
-          // console.log(sale.timestamp, tenMinutesAgo);
           // check sale price against current one hour floor, update if lower
           if (sale.price.amount.decimal < tempOneHourFloor) {
             tempOneHourFloor = sale.price.amount.decimal;
@@ -86,6 +85,8 @@ export const ActivityOverview = ({
     // tempOneHourFloor will be 99999 if there have been no sales in the past hour
     if (tempOneHourFloor !== 99999) {
       setOneHourFloor(tempOneHourFloor);
+    } else {
+      setOneHourFloor('---');
     }
   }, [collectionSalesData, oneDayAgo, oneHourAgo, tenMinutesAgo]);
 
