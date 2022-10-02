@@ -159,7 +159,7 @@ export const TokenModal = ({
                 {tokenData.tokens[0].token.attributes
                   ? tokenData.tokens[0].token.attributes.map(
                       (attribute, index: number) => (
-                        <div key={attribute.key}>
+                        <div key={index}>
                           {index === 0 ? null : <hr className='my-1'></hr>}
                           <div className='text-sky-400 font-semibold'>
                             {attribute.key}
