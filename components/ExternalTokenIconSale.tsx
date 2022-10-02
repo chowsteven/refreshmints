@@ -32,6 +32,8 @@ export const ExternalTokenIconSale = ({
     image = 'etherscan';
   } else if (marketplace === 'atomic0.com') {
     marketplaceBase = 'https://atomic0.com/nft/';
+  } else if (marketplace === 'cryptopunks.app') {
+    marketplaceBase = 'https://cryptopunks.app//cryptopunks/details/';
   }
 
   // if etherscan, provide a link to the tx
@@ -55,6 +57,19 @@ export const ExternalTokenIconSale = ({
         <a>
           <Image
             src={`/images/atomic0.svg`}
+            height={20}
+            width={20}
+            alt='Marketplace icon'
+          />
+        </a>
+      </Link>
+    );
+  } else if (marketplace === 'cryptopunks.app') {
+    return (
+      <Link href={marketplaceBase + tokenId}>
+        <a>
+          <Image
+            src={`/images/cryptopunks.png`}
             height={20}
             width={20}
             alt='Marketplace icon'
