@@ -12,8 +12,7 @@ export const CollectionSales = ({
   return (
     <>
       {collectionSalesData ? (
-        // TODO: increase height to fit ~500 sales
-        <div className='h-[300px] overflow-y-auto scrollbar'>
+        <div className='h-[960px] overflow-y-auto scrollbar'>
           {collectionSalesData.sales.map((sale: SingleSale, index: number) => (
             <SaleCard key={index} sale={sale} />
           ))}

@@ -12,8 +12,7 @@ export const CollectionListings = ({
   return (
     <>
       {collectionListingsData ? (
-        // TODO: increase height to fit ~500 listings
-        <div className='h-[300px] overflow-y-auto scrollbar'>
+        <div className='h-[960px] overflow-y-auto scrollbar'>
           {collectionListingsData.orders.map(
             (listing: SingleListing, index: number) => (
               <ListingCard key={index} listing={listing} />
