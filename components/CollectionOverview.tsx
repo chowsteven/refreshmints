@@ -17,7 +17,7 @@ export const CollectionOverview = ({
     <div className='flex justify-center items-center lg:justify-start'>
       <div className='mr-3'>
         <Image
-          src={collectionData.image}
+          src={collectionData.image ? collectionData.image : '/images/eth.png'}
           height={75}
           width={75}
           alt='Collection image'
