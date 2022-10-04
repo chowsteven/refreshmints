@@ -2,8 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface ExternalTokenIconSaleProps {
-  marketplace: string;
-  collectionId: string;
+  marketplace: string | null;
+  collectionId: string | null;
   tokenId: string;
   txHash: string;
 }

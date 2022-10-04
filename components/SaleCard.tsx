@@ -51,15 +51,20 @@ export const SaleCard = ({ sale }: SaleCardProps) => {
             {sale.price.amount.decimal}
           </span>
           <div className='flex gap-2'>
-            <ExternalTokenIconSale
-              marketplace={sale.orderSource}
-              collectionId={sale.token.collection.id}
-              tokenId={sale.token.tokenId}
-              txHash={sale.txHash}
-            />
+            {sale.orderSource && sale.token.collection.id ? (
+              <ExternalTokenIconSale
+                marketplace={sale.orderSource}
+                collectionId={sale.token.collection.id}
+                tokenId={sale.token.tokenId}
+                txHash={sale.txHash}
+              />
+            ) : null}
+
             <ExternalTokenIconSale
               marketplace='etherscan.io'
-              collectionId={sale.token.collection.id}
+              collectionId={
+                sale.token.collection.id ? sale.token.collection.id : null
+              }
               tokenId={sale.token.tokenId}
               txHash={sale.txHash}
             />

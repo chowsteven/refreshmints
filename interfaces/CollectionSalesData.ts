@@ -7,18 +7,18 @@ export interface SingleSale {
     name: string | null;
     image: string | null;
     collection: {
-      id: string;
-      name: string;
+      id: string | null;
+      name: string | null;
     };
   };
-  orderId: string;
-  orderSource: string;
+  orderId: string | null;
+  orderSource: string | null;
   orderSide: string;
   orderKind: string;
   from: string;
   to: string;
   amount: string;
-  fillSource: string;
+  fillSource: string | null;
   block: number;
   txHash: string;
   logIndex: number;

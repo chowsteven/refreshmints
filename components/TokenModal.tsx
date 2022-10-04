@@ -98,13 +98,16 @@ export const TokenModal = ({
             {/* collection name and token id */}
             <Dialog.Title className='flex justify-between py-2 text-xl font-semibold'>
               <div>
-                <Link
-                  href={`/collection/${tokenData.tokens[0].token.collection.id}`}
-                >
-                  <a className='text-sky-400'>
-                    {tokenData.tokens[0].token.collection.name}
-                  </a>
-                </Link>{' '}
+                {tokenData.tokens[0].token.collection.id &&
+                tokenData.tokens[0].token.collection.name ? (
+                  <Link
+                    href={`/collection/${tokenData.tokens[0].token.collection.id}`}
+                  >
+                    <a className='text-sky-400'>
+                      {tokenData.tokens[0].token.collection.name}
+                    </a>
+                  </Link>
+                ) : null}{' '}
                 | #{tokenData.tokens[0].token.tokenId}
               </div>
               <button

@@ -23,7 +23,7 @@ export interface SingleToken {
     collection: {
       id: string;
       name: string;
-      image: string;
+      image: string | null;
       slug: string;
     };
     lastBuy: {
