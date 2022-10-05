@@ -36,12 +36,16 @@ export const ExternalTokenIconSale = ({
     marketplaceBase = 'https://cryptopunks.app//cryptopunks/details/';
   }
 
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
   // if etherscan, provide a link to the tx
   // else, link to the token on market
   if (marketplace === 'etherscan.io') {
     return (
       <Link href={`https://etherscan.io/tx/${txHash}`}>
-        <a>
+        <a onClick={handleClick}>
           <Image
             src={`/images/${image}.png`}
             height={20}
@@ -54,7 +58,7 @@ export const ExternalTokenIconSale = ({
   } else if (marketplace === 'atomic0.com') {
     return (
       <Link href={marketplaceBase + collectionId + '/' + tokenId}>
-        <a>
+        <a onClick={handleClick}>
           <Image
             src={`/images/atomic0.svg`}
             height={20}
@@ -67,7 +71,7 @@ export const ExternalTokenIconSale = ({
   } else if (marketplace === 'cryptopunks.app') {
     return (
       <Link href={marketplaceBase + tokenId}>
-        <a>
+        <a onClick={handleClick}>
           <Image
             src={`/images/cryptopunks.png`}
             height={20}
@@ -80,7 +84,7 @@ export const ExternalTokenIconSale = ({
   } else {
     return (
       <Link href={marketplaceBase + collectionId + '/' + tokenId}>
-        <a>
+        <a onClick={handleClick}>
           <Image
             src={`/images/${image}.png`}
             height={20}

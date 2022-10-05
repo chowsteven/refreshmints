@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
 
 interface ExternalTokenIconListingProps {
   marketplace: string;
@@ -10,10 +11,14 @@ export const ExternalTokenIconListing = ({
   marketplace,
   url,
 }: ExternalTokenIconListingProps) => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
   if (marketplace === 'CryptoPunks') {
     return (
       <Link href='https://cryptopunks.app/cryptopunks/forsale' passHref={true}>
-        <a>
+        <a onClick={handleClick}>
           <Image
             src={`/images/${marketplace.toLowerCase()}.png`}
             height={20}
@@ -26,7 +31,7 @@ export const ExternalTokenIconListing = ({
   } else {
     return (
       <Link href={url ? url : ''}>
-        <a>
+        <a onClick={handleClick}>
           <Image
             src={`/images/${marketplace.toLowerCase()}.png`}
             height={20}
