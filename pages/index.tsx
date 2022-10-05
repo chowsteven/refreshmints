@@ -36,9 +36,9 @@ const Home: NextPage = () => {
               width={24}
               alt='Checkmark'
             />
-            Check out the continuous{' '}
-            <Link href='/firehose'>
-              <a className='text-red-400'>firehose</a>
+            Look through the freshest{' '}
+            <Link href='/mints'>
+              <a className='text-red-400'>mints</a>
             </Link>
           </div>
           <div className='flex items-center gap-2'>
@@ -48,11 +48,22 @@ const Home: NextPage = () => {
               width={24}
               alt='Checkmark'
             />
-            Take a look at{' '}
+            Check out the continuous{' '}
+            <Link href='/firehose'>
+              <a className='text-blue-400'>firehose</a>
+            </Link>
+          </div>
+          <div className='flex items-center gap-2'>
+            <Image
+              src='/images/check.png'
+              height={24}
+              width={24}
+              alt='Checkmark'
+            />
+            Take a look at NFTs that are
             <Link href='/trending'>
               <a className='text-green-400'>trending</a>
             </Link>
-            NFTs
           </div>
         </div>
       </div>
