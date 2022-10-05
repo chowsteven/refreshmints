@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   const { id } = req.query;
   // fetch latest sales
-  const url = `https://api.reservoir.tools/orders/asks/v3?contracts=${id}&includePrivate=false&includeMetadata=true&includeRawData=false&sortBy=price&limit=5`;
+  const url = `https://api.reservoir.tools/orders/asks/v3?contracts=${id}&includePrivate=false&includeMetadata=true&includeRawData=false&sortBy=price&limit=15`;
   const response = await fetch(url, fetchOptions);
 
   // if error, send error message
