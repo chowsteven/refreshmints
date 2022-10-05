@@ -13,7 +13,15 @@ export const useCollectionSales = (id: string) => {
     fetcher,
     {
       onSuccess: (data) => {
-        setCollectionSalesData(data);
+        // API considers mints as sales, so remove mints
+        const salesData = data.sales.filter(
+          (sale) => sale.orderKind !== 'mint'
+        );
+
+        setCollectionSalesData({
+          sales: salesData,
+          continuation: data.continuation,
+        });
       },
     }
   );
