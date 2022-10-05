@@ -26,7 +26,7 @@ export const TokenModal = ({
 
   // check most recent trade, which could be a lastBuy, lastSell or none
   useEffect(() => {
-    if (tokenData) {
+    if (tokenData && tokenData.tokens[0]) {
       // if both lastBuy and lastSell exist, set the price of the more recent event
       if (
         tokenData.tokens[0].token.lastBuy.timestamp &&
@@ -92,7 +92,7 @@ export const TokenModal = ({
       {/* backdrop */}
       <div className='fixed inset-0 bg-black/30' aria-hidden='true' />
 
-      {tokenData ? (
+      {tokenData && tokenData.tokens[0] ? (
         <div className='flex items-center justify-center fixed inset-0 p-4'>
           <Dialog.Panel className='w-max h-max mx-8 px-12 py-6 rounded-lg bg-gray-700 text-white'>
             {/* collection name and token id */}
