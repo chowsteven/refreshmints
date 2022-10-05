@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
 import { TrendingObject } from '../interfaces/TrendingObject';
-import { CollectionData } from '../interfaces/CollectionData';
 import { TrendingCard } from './TrendingCard';
 
 interface TrendingContainerProps {
