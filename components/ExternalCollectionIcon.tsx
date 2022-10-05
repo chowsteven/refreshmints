@@ -13,6 +13,11 @@ export const ExternalCollectionIcon = ({
   collectionSlug,
 }: ExternaCollectionIconProps) => {
   let marketplaceBase = '';
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
   if (marketplace === 'opensea') {
     marketplaceBase = 'https://opensea.io/collection/';
   } else if (marketplace === 'looksrare') {
@@ -26,7 +31,7 @@ export const ExternalCollectionIcon = ({
   if (marketplace === 'opensea') {
     return (
       <Link href={marketplaceBase + collectionSlug}>
-        <a>
+        <a onClick={handleClick}>
           <Image
             src={`/images/${marketplace}.png`}
             height={20}
@@ -39,7 +44,7 @@ export const ExternalCollectionIcon = ({
   } else {
     return (
       <Link href={marketplaceBase + collectionId}>
-        <a>
+        <a onClick={handleClick}>
           <Image
             src={`/images/${marketplace}.png`}
             height={20}
