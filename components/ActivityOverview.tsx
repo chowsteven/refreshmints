@@ -112,7 +112,7 @@ export const ActivityOverview = ({
       </div>
       <div>
         <OverviewStat
-          stat={collectionData.floorAsk.price.amount.decimal}
+          stat={collectionData.floorAsk.price?.amount.decimal}
           description='FLOOR'
         />
       </div>
