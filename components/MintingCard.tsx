@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { MintingObject } from '../interfaces/MintingObject';
 import Link from 'next/link';
+import { ExternalCollectionIcon } from './ExternalCollectionIcon';
 
 interface MintingCardProps {
   trending: MintingObject;
@@ -23,6 +24,11 @@ export const MintingCard = ({ trending }: MintingCardProps) => {
             alt='Collection image'
           />
           <span className='font-medium text-md'>{collection.name}</span>
+          <ExternalCollectionIcon
+            marketplace='etherscan'
+            collectionId={collectionId}
+            collectionSlug=''
+          />
         </th>
 
         {/* number of mints */}
