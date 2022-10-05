@@ -5,9 +5,19 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  let url: string;
   const { id } = req.query;
-  // fetch latest sales
-  const url = `https://api.reservoir.tools/collections/v5?id=${id}&includeTopBid=false&includeOwnerCount=true&limit=1`;
+
+  // fetch collection
+  const queryId = id as string;
+
+  if (queryId.length > 42) {
+    // fetching more than one collection
+    url = `https://api.reservoir.tools/collections/v5?contract=${queryId}&includeTopBid=false&limit=10`;
+  } else {
+    // one collection
+    url = `https://api.reservoir.tools/collections/v5?id=${queryId}&includeTopBid=false&includeOwnerCount=true&limit=1`;
+  }
   const response = await fetch(url, fetchOptions);
 
   // if error, send error message
