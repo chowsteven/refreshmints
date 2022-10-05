@@ -45,7 +45,10 @@ export const useTrendingCollections = (startTimestamp: string) => {
           if (
             // this address seems to belong to a person but sometimes shows up as a sale
             // querying via collection with this address returns no information and breaks everything
-            sale.token.contract === '0xa604060890923ff400e8c6f5290461a83aedacec'
+            sale.token.contract ===
+              '0xa604060890923ff400e8c6f5290461a83aedacec' ||
+            // only want sales, so filter out mint
+            sale.orderKind === 'mint'
           )
             // return acts as continue in a forEach
             return;
@@ -76,7 +79,7 @@ export const useTrendingCollections = (startTimestamp: string) => {
         );
         setCountVolumeObj(tempCountVolumeObj);
 
-        // TODO: fetch again with continuation string if it exists
+        // TODO: fetch again with continuation string if it exists (ex: lots of events within 5m)
       },
     }
   );
