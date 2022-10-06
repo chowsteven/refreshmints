@@ -51,7 +51,7 @@ const CollectionPage: NextPage<CollectionPageProps> = ({
         <link rel='icon' href='/images/favicon.ico' />
       </Head>
 
-      <div className='p-12'>
+      <div className='pt-10 pl-12 pr-12'>
         {/* header */}
         <div className='mb-12'>
           {collectionData && numHoldersArr && collectionSalesData ? (

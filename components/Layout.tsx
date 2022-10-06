@@ -8,9 +8,9 @@ interface LayoutProps {
 
 export const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className='flex flex-col bg-gray-900 h-screen font-montserrat text-white'>
+    <div className='flex flex-col bg-gray-900 min-h-screen font-montserrat text-white'>
       <Navbar />
-      <main className='flex-1 overflow-hidden'>{children}</main>
+      <main className='flex-1'>{children}</main>
       <Footer />
     </div>
   );
