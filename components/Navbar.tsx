@@ -21,7 +21,7 @@ export const Navbar = () => {
       </div>
       <div className='flex gap-6'>
         <Link href='/mints'>Mints</Link>
-        <Link href='/firehose'>Firehose</Link>
+        {/* <Link href='/firehose'>Firehose</Link> */}
         <Link href='/trending'>Trending</Link>
       </div>
     </nav>

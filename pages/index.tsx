@@ -41,7 +41,7 @@ const Home: NextPage = () => {
               <a className='text-red-400'>mints</a>
             </Link>
           </div>
-          <div className='flex items-center gap-2'>
+          {/* <div className='flex items-center gap-2'>
             <Image
               src='/images/check.png'
               height={24}
@@ -52,7 +52,7 @@ const Home: NextPage = () => {
             <Link href='/firehose'>
               <a className='text-blue-400'>firehose</a>
             </Link>
-          </div>
+          </div> */}
           <div className='flex items-center gap-2'>
             <Image
               src='/images/check.png'
@@ -60,7 +60,7 @@ const Home: NextPage = () => {
               width={24}
               alt='Checkmark'
             />
-            Take a look at NFTs that are
+            Check out NFTs that are
             <Link href='/trending'>
               <a className='text-green-400'>trending</a>
             </Link>
