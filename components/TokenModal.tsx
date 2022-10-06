@@ -124,19 +124,35 @@ export const TokenModal = ({
               {/* token image, ranks and external links */}
               <div className='flex flex-col'>
                 <div>
-                  <Image
-                    src={tokenData.tokens[0].token.image}
-                    width={350}
-                    height={350}
-                    alt='NFT image'
-                  />
+                  {tokenData.tokens[0].token.image ? (
+                    <Image
+                      src={tokenData.tokens[0].token.image}
+                      width={350}
+                      height={350}
+                      alt='NFT image'
+                    />
+                  ) : (
+                    <Image
+                      src='/images/eth.png'
+                      width={100}
+                      height={100}
+                      alt='ETH logo'
+                    />
+                  )}
                 </div>
                 <div className='flex justify-between p-2 rounded-md bg-gray-600'>
                   <div className='font-medium'>
-                    <span className='text-sky-400'>RANK: </span>
-                    {tokenData.tokens[0].token.rarityRank}
+                    {tokenData.tokens[0].token.rarityRank ? (
+                      <span className='text-sky-400'>
+                        RANK: {tokenData.tokens[0].token.rarityRank}
+                      </span>
+                    ) : (
+                      <span className='text-sky-400 align-middle mr-4'>
+                        RANK: <span className='text-white'>???</span>
+                      </span>
+                    )}
                   </div>
-                  <div className='flex gap-2'>
+                  <div className='flex gap-2 mt-1'>
                     <ExternalTokenIconListing
                       marketplace='opensea'
                       url={`https://opensea.io/assets/ethereum/${contract}/${tokenId}`}
@@ -159,21 +175,26 @@ export const TokenModal = ({
 
               {/* traits */}
               <div className='flex flex-col h-min p-4 border-2 rounded-md border-gray-900 2xl:w-64'>
-                {tokenData.tokens[0].token.attributes
-                  ? tokenData.tokens[0].token.attributes.map(
-                      (attribute, index: number) => (
-                        <div key={index}>
-                          {index === 0 ? null : <hr className='my-1'></hr>}
-                          <div className='text-sky-400 font-semibold'>
-                            {attribute.key}
-                          </div>
-                          <div className='text-lg font-medium'>
-                            {attribute.value}
-                          </div>
+                {tokenData.tokens[0].token.attributes &&
+                tokenData.tokens[0].token.attributes.length > 0 ? (
+                  tokenData.tokens[0].token.attributes.map(
+                    (attribute, index: number) => (
+                      <div key={index}>
+                        {index === 0 ? null : <hr className='my-1'></hr>}
+                        <div className='text-sky-400 font-semibold'>
+                          {attribute.key}
                         </div>
-                      )
+                        <div className='text-lg font-medium'>
+                          {attribute.value}
+                        </div>
+                      </div>
                     )
-                  : null}
+                  )
+                ) : (
+                  <div className='flex justify-center'>
+                    Traits not available
+                  </div>
+                )}
               </div>
 
               {/* last sell info */}
