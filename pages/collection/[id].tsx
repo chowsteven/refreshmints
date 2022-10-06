@@ -145,10 +145,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   // https://stackoverflow.com/a/65546189
   const [collectionRes, holdersRes, listingsRes, salesRes] = await Promise.all([
-    fetch(`http://localhost:3000/api/nft/collection/${id}`),
-    fetch(`http://localhost:3000/api/nft/holders/${id}`),
-    fetch(`http://localhost:3000/api/nft/listings/${id}`),
-    fetch(`http://localhost:3000/api/nft/sales/${id}`),
+    fetch(`https://refreshmints.vercel.app/api/nft/collection/${id}`),
+    fetch(`https://refreshmints.vercel.app/api/nft/holders/${id}`),
+    fetch(`https://refreshmints.vercel.app/api/nft/listings/${id}`),
+    fetch(`https://refreshmints.vercel.app/api/nft/sales/${id}`),
   ]);
 
   const [collection, holders, listings, sales] = await Promise.all([
